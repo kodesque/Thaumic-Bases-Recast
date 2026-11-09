@@ -1,0 +1,10 @@
+{
+  "parent": "block/orientable",
+  "textures": {
+
+    "top": "tbases:blocks/cryingobelisk_top",
+    "side": "tbases:blocks/cryingobelisk_side",
+    "front": "tbases:blocks/cryingobelisk",
+    "bottom":"tbases:blocks/cryingobelisk_buttom"
+  }
+}

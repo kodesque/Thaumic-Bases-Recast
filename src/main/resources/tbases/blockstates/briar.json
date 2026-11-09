@@ -1,0 +1,42 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "transform": "forge:default-block",
+    "textures": {
+      "particle": "#all"
+    }
+  },
+  "variants": {
+    "inventory":{"model": "tbases:briar_lagre" ,
+        "textures": {
+          "all": "tbases:blocks/briar"
+     }
+    },
+    "age": {
+      "0": {
+        "model": "tbases:briar_small",
+        "textures": {
+          "all": "tbases:blocks/briar"
+        }
+      },
+      "1": {
+        "model": "tbases:briar_medium",
+        "textures": {
+          "all": "tbases:blocks/briar"
+        }
+      },
+      "2": {
+        "model": "tbases:briar_lagre",
+        "textures": {
+          "all": "tbases:blocks/briar"
+        }
+      },
+      "3": {
+        "model": "tbases:briar_lagre",
+        "textures": {
+          "all": "tbases:blocks/briar_bag"
+        }
+      }
+    }
+  }
+}

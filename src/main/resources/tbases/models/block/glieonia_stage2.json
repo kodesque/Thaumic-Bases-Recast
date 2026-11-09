@@ -1,0 +1,6 @@
+{
+  "parent": "block/crop",
+  "textures": {
+    "crop": "tbases:blocks/glieonia_stage_2"
+  }
+}

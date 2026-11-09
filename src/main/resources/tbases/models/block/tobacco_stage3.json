@@ -1,0 +1,6 @@
+{
+  "parent": "block/crop",
+  "textures": {
+    "crop": "tbases:blocks/tobacco_stage_3"
+  }
+}

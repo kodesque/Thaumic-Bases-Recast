@@ -1,0 +1,20 @@
+
+{
+  "result": {
+    "item": "tbases:quicksilverbrick",
+    "count": 4
+  },
+  "pattern": [
+    "II",
+    "II"
+
+  ],
+
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "I": {
+      "item": "tbases:quicksilverblock"
+    }
+  }
+
+}

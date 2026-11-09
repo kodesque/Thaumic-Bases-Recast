@@ -1,0 +1,14 @@
+{
+  "forge_marker": 1,
+  "defaults":
+  {
+    "transform": "forge:default-block",
+    "model": "cross",
+    "textures": { "cross": "tbases:blocks/nethersapling" }
+  },
+  "variants": {
+    "normal": [{}], "inventory": [{"model": "forge:item-layer", "transform": "forge:default-item",
+      "textures": { "layer0": "tbases:blocks/nethersapling" }}],
+    "stage": { "0":{}, "1":{} }
+  }
+}

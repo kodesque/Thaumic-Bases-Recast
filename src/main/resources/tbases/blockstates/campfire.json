@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "inventory":{"model": "tbases:campfire"},
+    "state=0": { "model": "tbases:campfire" },
+    "state=1": { "model": "tbases:campfire_1" },
+    "state=2": { "model": "tbases:campfire_1" }
+
+
+  }
+}

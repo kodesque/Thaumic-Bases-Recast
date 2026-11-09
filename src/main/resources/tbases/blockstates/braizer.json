@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "inventory":{"model": "tbases:braizer"},
+    "state=0": { "model": "tbases:braizer" },
+    "state=1": { "model": "tbases:braizer" },
+    "state=2": { "model": "tbases:braizer" }
+
+
+  }
+}

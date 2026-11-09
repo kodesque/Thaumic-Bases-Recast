@@ -1,0 +1,7 @@
+{
+    "parent": "block/stem_fruit",
+    "textures": {
+        "stem": "tbases:blocks/red_disconnected",
+        "upperstem": "tbases:blocks/red_connected"
+    }
+}

@@ -1,0 +1,9 @@
+{
+  "variants": {
+    "inventory":{"model": "tbases:aurelia_stage_close"},
+    "state=0": { "model": "tbases:aurelia_stage_close" },
+    "state=1": { "model": "tbases:aurelia_stage_open" }
+
+
+  }
+}

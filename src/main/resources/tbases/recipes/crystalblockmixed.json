@@ -1,0 +1,19 @@
+
+{
+  "result": {
+    "item": "tbases:crystalblockmixed"
+  },
+  "pattern": [
+    "III",
+    "III",
+    "III"
+  ],
+
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "I": {
+      "item": "tbases:mixedingot"
+    }
+  }
+
+}

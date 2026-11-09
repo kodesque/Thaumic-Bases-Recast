@@ -1,0 +1,19 @@
+
+{
+  "result": {
+    "item": "tbases:thauminitelegs"
+  },
+  "pattern": [
+    "III",
+    "I I",
+    "I I"
+  ],
+
+  "type": "minecraft:crafting_shaped",
+  "key": {
+    "I": {
+      "item": "tbases:thauminite_ingot"
+    }
+  }
+
+}

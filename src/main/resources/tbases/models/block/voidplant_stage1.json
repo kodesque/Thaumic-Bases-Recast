@@ -1,0 +1,6 @@
+{
+  "parent": "block/crop",
+  "textures": {
+    "crop": "tbases:blocks/voidplant_stage_1"
+  }
+}
