@@ -1,6 +1,0 @@
-{
-  "parent": "block/crop",
-  "textures": {
-    "crop": "tbases:blocks/plax_stage_3"
-  }
-}

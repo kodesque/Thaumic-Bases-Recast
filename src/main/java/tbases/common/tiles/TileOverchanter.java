@@ -20,10 +20,10 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import tbases.common.inventory.ContainerOverchanter;
-import tbases.utils.dummy.MathUtils;
+import tbases.util.AllUtils;
+import tbases.util.MathUtils;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.casters.IInteractWithCaster;
 import thaumcraft.common.lib.SoundsTC;
@@ -36,336 +36,249 @@ import java.util.Map;
 import java.util.Set;
 
 public class TileOverchanter extends TileEntityLockable implements IInventory, IInteractWithCaster, ITickable {
+    public ItemStack inventory;
+    private int enchantingTime;
+    private boolean xpAbsorbed;
+    private boolean isEnchantingStarted;
+    private int syncTimer;
+    private int ticksExisted;
 
-    public ItemStack inventory = ItemStack.EMPTY;
-    public int enchantingTime;
-    public boolean xpAbsorbed;
-    public boolean isEnchantingStarted;
-    public int syncTimer;
-    int ticksExisted;
+    public TileOverchanter() {
+        this.inventory = ItemStack.EMPTY;
+    }
 
-//    public Lightning renderedLightning;
-
-    @Override
     public int getSizeInventory() {
         return 1;
     }
-    @Override
-    public void update() {
 
-        ++ticksExisted;
-        if(syncTimer <= 0)
-        {
-            syncTimer = 100;
+    public void update() {
+        ++this.ticksExisted;
+        if (this.syncTimer <= 0) {
+            this.syncTimer = 100;
             NBTTagCompound tg = new NBTTagCompound();
-            tg.setInteger("0", enchantingTime);
-            tg.setBoolean("1", xpAbsorbed);
-            tg.setBoolean("2", isEnchantingStarted);
+            tg.setInteger("0", this.enchantingTime);
+            tg.setBoolean("1", this.xpAbsorbed);
+            tg.setBoolean("2", this.isEnchantingStarted);
             tg.setInteger("x", this.pos.getX());
             tg.setInteger("y", this.pos.getY());
             tg.setInteger("z", this.pos.getZ());
-//            MiscUtils.syncTileEntity(tg, 0);
-        }else
-            --syncTimer;
+        } else {
+            --this.syncTimer;
+        }
 
-        if(this.inventory.isEmpty())
-        {
-            isEnchantingStarted = false;
-            xpAbsorbed = false;
-            enchantingTime = 0;
-//            renderedLightning = null;
-        }else
-        {
-            if(this.isEnchantingStarted)
-            {
-                if(ticksExisted % 20 == 0)
-                {
-//                    renderedLightning = new Lightning(this.world.rand, new Coord3D(0,0,0), new Coord3D(MathUtils.randomDouble(this.world.rand)/50,MathUtils.randomDouble(this.world.rand)/50,MathUtils.randomDouble(this.world.rand)/50), 0.3F, 1,0,1);
-                    this.world.playSound(pos.getX(),pos.getY(),pos.getZ(),SoundsTC.infuserstart,SoundCategory.BLOCKS,1f,1.0f,false);
-                    if(EssentiaHandler.drainEssentia(this, Aspect.MAGIC, null, 8, false, 8))
-                    {
-                        ++enchantingTime;
-                        if(enchantingTime >= 16 && !this.xpAbsorbed)
-                        {
-                            List<EntityPlayer> players = this.world.getEntitiesWithinAABB(EntityPlayer.class, new AxisAlignedBB(pos.getX(), pos.getY(), pos.getZ(), pos.getX()+1, pos.getY()+1, pos.getZ()+1).expand(6, 3, 6));
-
-                            if(!players.isEmpty())
-                            {
-
-
-                                for(int i = 0; i < players.size(); ++i)
-                                {
-                                    EntityPlayer p = players.get(i);
-
-
-
-                                    if(p.experienceLevel >= 30)
-                                    {
-                                        p.attackEntityFrom(DamageSource.MAGIC, 8);
-                                        this.world.playSound(pos.getX(),pos.getY(),pos.getZ(),SoundsTC.zap,SoundCategory.BLOCKS,1f,1.0f,false);
-                                        p.experienceLevel -= 30;
-                                        xpAbsorbed = true;
-                                        break;
-                                    }
-                                }
+        if (this.inventory.isEmpty()) {
+            this.isEnchantingStarted = false;
+            this.xpAbsorbed = false;
+            this.enchantingTime = 0;
+        } else if (this.isEnchantingStarted && this.ticksExisted % 20 == 0) {
+            this.world.playSound((double)this.pos.getX(), (double)this.pos.getY(), (double)this.pos.getZ(), SoundsTC.infuserstart, SoundCategory.BLOCKS, 1.0F, 1.0F, false);
+            if (EssentiaHandler.drainEssentia(this, Aspect.MAGIC, (EnumFacing)null, 8, false, 8)) {
+                ++this.enchantingTime;
+                if (this.enchantingTime >= 16 && !this.xpAbsorbed) {
+                    List<EntityPlayer> players = this.world.getEntitiesWithinAABB(EntityPlayer.class, (new AxisAlignedBB((double)this.pos.getX(), (double)this.pos.getY(), (double)this.pos.getZ(), (double)(this.pos.getX() + 1), (double)(this.pos.getY() + 1), (double)(this.pos.getZ() + 1))).grow((double)6.0F, (double)3.0F, (double)6.0F));
+                    if (!players.isEmpty()) {
+                        for(int i = 0; i < players.size(); ++i) {
+                            EntityPlayer p = (EntityPlayer)players.get(i);
+                            if (p.experienceLevel >= 30) {
+                                p.attackEntityFrom(DamageSource.MAGIC, 8.0F);
+                                this.world.playSound((double)this.pos.getX(), (double)this.pos.getY(), (double)this.pos.getZ(), SoundsTC.zap, SoundCategory.BLOCKS, 1.0F, 1.0F, false);
+                                p.experienceLevel -= 30;
+                                this.xpAbsorbed = true;
+                                break;
                             }
                         }
-
-                        if(xpAbsorbed && enchantingTime >= 32)
-                        {
-                            NBTTagList nbttaglist = this.inventory.getEnchantmentTagList();
-
-                            for(int i = 0; i < nbttaglist.tagCount(); ++i)
-                            {
-                                int enchId = this.findEnchantment(inventory);
-                                Enchantment ench = Enchantment.getEnchantmentByID(enchId);
-                                NBTTagCompound tag = nbttaglist.getCompoundTagAt(i);
-
-
-                                if(Enchantment.getEnchantmentByID(i)==ench)
-                                {
-
-
-                                    tag.setShort("lvl", (short) (tag.getShort("lvl")+5));
-                                    NBTTagCompound stackTag = inventory.getOrCreateSubCompound("overchants");
-                                    if(!stackTag.hasKey("overchants"))
-                                    {
-                                        stackTag.setIntArray("overchants", new int[]{enchId});
-                                    }else
-                                    {
-                                        int[] arrayInt = stackTag.getIntArray("overchants");
-                                        int[] newArrayInt = new int[arrayInt.length+1];
-                                        for(int j = 0; j < arrayInt.length; ++j)
-                                        {
-                                            newArrayInt[j] = arrayInt[j];
-                                        }
-                                        newArrayInt[newArrayInt.length-1]=enchId;
-
-                                        stackTag.setIntArray("overchants", newArrayInt);
-                                    }
-
-                                }
-                            }
-                            isEnchantingStarted = false;
-                            xpAbsorbed = false;
-                            enchantingTime = 0;
-//                            renderedLightning = null;
-                            this.world.playSound(pos.getX(),pos.getY(),pos.getZ(),SoundsTC.wand,SoundCategory.BLOCKS,1f,1.0f,false);
-                        }
-
-                    }else
-                    {
-                        --enchantingTime;
                     }
                 }
+
+                if (this.xpAbsorbed && this.enchantingTime >= 32) {
+                    NBTTagList nbttaglist = this.inventory.getEnchantmentTagList();
+
+                    for(int i = 0; i < nbttaglist.tagCount(); ++i) {
+                        int enchId = this.findEnchantment(this.inventory);
+                        Enchantment ench = Enchantment.getEnchantmentByID(enchId);
+                        NBTTagCompound tag = nbttaglist.getCompoundTagAt(i);
+                        if (tag != null && Enchantment.getEnchantmentByID(tag.getShort("id")) == ench) {
+                            tag.setShort("lvl", (short)(tag.getShort("lvl") + 1));
+                            NBTTagCompound stackTag = AllUtils.getStackTag(this.inventory);
+                            if (!stackTag.hasKey("overchants")) {
+                                stackTag.setIntArray("overchants", new int[]{enchId});
+                            } else {
+                                int[] arrayInt = stackTag.getIntArray("overchants");
+                                int[] newArrayInt = new int[arrayInt.length + 1];
+                                System.arraycopy(arrayInt, 0, newArrayInt, 0, arrayInt.length);
+                                newArrayInt[newArrayInt.length - 1] = enchId;
+                                stackTag.setIntArray("overchants", newArrayInt);
+                            }
+                            break;
+                        }
+                    }
+
+                    this.isEnchantingStarted = false;
+                    this.xpAbsorbed = false;
+                    this.enchantingTime = 0;
+                    this.world.playSound((double)this.pos.getX(), (double)this.pos.getY(), (double)this.pos.getZ(), SoundsTC.wand, SoundCategory.BLOCKS, 1.0F, 1.0F, false);
+                }
+            } else {
+                --this.enchantingTime;
             }
+        }
+
+    }
+
+    private boolean canStartEnchanting() {
+        if (!this.isEnchantingStarted && !this.inventory.isEmpty() && this.inventory.getEnchantmentTagList().tagCount() > 0) {
+            return this.findEnchantment(this.inventory) != -1;
+        } else {
+            return false;
         }
     }
 
-
-    private boolean canStartEnchanting(){
-        if(!this.isEnchantingStarted)
-            if(!this.inventory.isEmpty()){
-                if(this.inventory.getEnchantmentTagList().tagCount() > 0){
-                    if(findEnchantment(inventory)!=-1){
-                        return true;
-                    }
-
-                }
-
-            }
-        return false;
-    }
-
-    private  int findEnchantment(ItemStack enchated) {
-        NBTTagCompound stackTag = inventory.getTagCompound();
+    private int findEnchantment(ItemStack enchated) {
+        NBTTagCompound stackTag = AllUtils.getStackTag(this.inventory);
         Map<Enchantment, Integer> ench = EnchantmentHelper.getEnchantments(enchated);
         Set<Enchantment> keys = ench.keySet();
-        Iterator<Enchantment>$i = keys.iterator();
+        Iterator<Enchantment> $i = keys.iterator();
 
-
-        while ($i.hasNext()){
-            Enchantment enchantment = $i.next();
-            enchantment.getEnchantmentByID(stackTag.getInteger("id"));
-            int j = stackTag.getShort("lvl");
-
-            if(!stackTag.hasKey("overchants")){
-                return j;
+        while($i.hasNext()) {
+            int i = Enchantment.getEnchantmentID((Enchantment)$i.next());
+            if (!stackTag.hasKey("overchants")) {
+                return i;
             }
-            int[]overchants = stackTag.getIntArray("overchants");
-            if(MathUtils.arrayContains(overchants,j)){
-                continue;
+
+            int[] overchants = stackTag.getIntArray("overchants");
+            if (!MathUtils.arrayContains(overchants, i)) {
+                return i;
             }
-            return j;
         }
-        return 1;
+
+        return -1;
     }
 
-    public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt)
-    {
-        enchantingTime = pkt.getNbtCompound().getInteger("0");
-        xpAbsorbed = pkt.getNbtCompound().getBoolean("1");
-        isEnchantingStarted = pkt.getNbtCompound().getBoolean("2");
+    public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt) {
+        this.enchantingTime = pkt.getNbtCompound().getInteger("0");
+        this.xpAbsorbed = pkt.getNbtCompound().getBoolean("1");
+        this.isEnchantingStarted = pkt.getNbtCompound().getBoolean("2");
     }
 
-    @Override
     public boolean isEmpty() {
         return false;
     }
 
-    @Override
     public ItemStack getStackInSlot(int index) {
-        return inventory;
+        return this.inventory;
     }
 
-    @Override
     public ItemStack decrStackSize(int index, int count) {
-        if (!this.inventory.isEmpty())
-        {
-            ItemStack itemstack;
-
-            if (this.inventory.getMaxStackSize() <= count)
-            {
-                itemstack = this.inventory;
+        if (!this.inventory.isEmpty()) {
+            if (this.inventory.getMaxStackSize() <= count) {
+                ItemStack itemstack = this.inventory;
                 this.inventory = ItemStack.EMPTY;
                 this.markDirty();
                 return itemstack;
-            }
-            itemstack = this.inventory.splitStack(count);
+            } else {
+                ItemStack itemstack = this.inventory.splitStack(count);
+                if (this.inventory.getMaxStackSize() == 0) {
+                    this.inventory = ItemStack.EMPTY;
+                }
 
-            if (this.inventory.getMaxStackSize() == 0)
-            {
-                this.inventory = ItemStack.EMPTY;
+                this.markDirty();
+                return itemstack;
             }
-
-            this.markDirty();
-            return itemstack;
+        } else {
+            return ItemStack.EMPTY;
         }
-        return ItemStack.EMPTY;
     }
 
-
-    @Override
     public ItemStack removeStackFromSlot(int index) {
-        ItemStack old = inventory.copy();
+        ItemStack old = this.inventory.copy();
         this.inventory = ItemStack.EMPTY;
         return old;
     }
 
-    @Override
     public void setInventorySlotContents(int index, ItemStack stack) {
-        inventory = stack;
+        this.inventory = stack;
     }
 
-    @Override
     public int getInventoryStackLimit() {
         return 1;
     }
 
-    @Override
     public boolean isUsableByPlayer(EntityPlayer player) {
-        return player.dimension == this.world.provider.getDimension() && !this.world.isAirBlock(pos);
+        return player.dimension == this.world.provider.getDimension() && !this.world.isAirBlock(this.pos);
     }
 
-    @Override
     public void openInventory(EntityPlayer player) {
-
     }
 
-    @Override
     public void closeInventory(EntityPlayer player) {
-
     }
 
-    @Override
     public boolean isItemValidForSlot(int index, ItemStack stack) {
         return stack.hasTagCompound() && stack.getEnchantmentTagList() != null;
     }
 
-    @Override
     public void readFromNBT(NBTTagCompound compound) {
         super.readFromNBT(compound);
-
-        enchantingTime = compound.getInteger("enchTime");
-        xpAbsorbed = compound.getBoolean("xpAbsorbed");
-        isEnchantingStarted = compound.getBoolean("enchStarted");
-        inventory = new ItemStack(compound.getCompoundTag("itm"));
+        this.enchantingTime = compound.getInteger("enchTime");
+        this.xpAbsorbed = compound.getBoolean("xpAbsorbed");
+        this.isEnchantingStarted = compound.getBoolean("enchStarted");
+        this.inventory = new ItemStack(compound.getCompoundTag("itm"));
     }
 
-    @Override
     public NBTTagCompound writeToNBT(NBTTagCompound compound) {
         super.writeToNBT(compound);
-
-        compound.setInteger("enchTime", enchantingTime);
-        compound.setBoolean("xpAbsorbed",xpAbsorbed);
-        compound.setBoolean("enchStarted", isEnchantingStarted);
-
-        compound.setTag("itm", inventory.serializeNBT());
+        compound.setInteger("enchTime", this.enchantingTime);
+        compound.setBoolean("xpAbsorbed", this.xpAbsorbed);
+        compound.setBoolean("enchStarted", this.isEnchantingStarted);
+        compound.setTag("itm", this.inventory.serializeNBT());
         return compound;
     }
 
-    @Override
     public boolean onCasterRightClick(World world, ItemStack itemStack, EntityPlayer entityPlayer, BlockPos blockPos, EnumFacing enumFacing, EnumHand enumHand) {
-        if(canStartEnchanting()&&entityPlayer.isSneaking())
-        {
-            isEnchantingStarted = true;
-            //entityPlayer.swingingHand(EnumHand.MAIN_HAND);
+        if (this.canStartEnchanting() && entityPlayer.isSneaking()) {
+            this.isEnchantingStarted = true;
             entityPlayer.swingArm(EnumHand.MAIN_HAND);
-            syncTimer = 0;
-            //this.worldObj.playSoundEffect(pos.getX(), pos.getY(), pos.getZ(), "thaumcraft:craftstart", 0.5F, 1.0F);
-            this.world.playSound(pos.getX(), pos.getY(), pos.getZ(),SoundsTC.craftstart,SoundCategory.BLOCKS,0.5f,1.0f,false);
+            this.syncTimer = 0;
+            this.world.playSound((double)this.pos.getX(), (double)this.pos.getY(), (double)this.pos.getZ(), SoundsTC.craftstart, SoundCategory.BLOCKS, 0.5F, 1.0F, false);
             return true;
+        } else {
+            return false;
         }
-        return false;
     }
 
-    @Override
     public int getField(int id) {
         return 0;
     }
 
-    @Override
     public void setField(int id, int value) {
-
     }
 
-    @Override
     public int getFieldCount() {
         return 0;
     }
 
-    @Override
     public void clear() {
-        inventory= ItemStack.EMPTY;
-
+        this.inventory = ItemStack.EMPTY;
     }
 
-
-
-    @Override
     public String getName() {
         return "thaumicbases.overchanter";
     }
 
     @Nullable
-    @Override
     public ITextComponent getDisplayName() {
-        return new TextComponentTranslation(getName());
+        return null;
     }
 
-    @Override
     public boolean hasCustomName() {
         return false;
     }
 
-
-    public Container createContainer(InventoryPlayer playerInventory, EntityPlayer playerIn)
-    {
+    public Container createContainer(InventoryPlayer playerInventory, EntityPlayer playerIn) {
         return new ContainerOverchanter(playerInventory, this);
     }
-    public String getGuiID()
-    {
-        return "minecraft:overchanter";
-    }
 
+    public String getGuiID() {
+        return "thaumicbases:overchanter";
+    }
 }

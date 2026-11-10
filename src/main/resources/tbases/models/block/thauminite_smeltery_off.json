@@ -1,8 +1,0 @@
-{
-  "parent": "block/orientable",
-  "textures": {
-    "top": "tbases:blocks/tFurnace/top",
-    "front": "tbases:blocks/tFurnace/front_on",
-    "side": "tbases:blocks/tFurnace/side"
-  }
-}

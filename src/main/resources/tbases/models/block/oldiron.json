@@ -1,8 +1,0 @@
-{
-  "parent": "block/orientable",
-  "textures": {
-    "top": "tbases:blocks/iron_block",
-    "side": "tbases:blocks/iron_block_side",
-    "front": "tbases:blocks/iron_block_side"
-  }
-}

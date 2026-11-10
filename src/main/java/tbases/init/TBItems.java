@@ -1,345 +1,161 @@
 package tbases.init;
 
-
 import com.google.common.base.Strings;
+import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
-import net.minecraft.item.*;
-import net.minecraft.item.ItemArmor.*;
-
-
-
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemArmor;
+import net.minecraft.item.ItemSeeds;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
-import tbases.client.creativetabs.TBCreativeTabs;
-import tbases.common.TBMaterial;
-import tbases.common.item.ItemBloodyArmor;
-import tbases.common.item.ItemHerobrinesScythe;
-import tbases.common.item.ItemMortarAndPesle;
-import tbases.common.item.ItemPyrofluidBucket;
-import tbases.common.item.ItemRosehipSyrup;
-import tbases.common.item.ItemSmokingPipe;
-import tbases.common.item.ItemThauminiteArmor;
-import tbases.common.item.ItemThauminiteAxe;
-import tbases.common.item.ItemThauminiteHoe;
-import tbases.common.item.ItemThauminitePickaxe;
-import tbases.common.item.ItemThauminiteShovel;
-import tbases.common.item.ItemThauminiteSword;
-import tbases.common.item.ItemVoidFlintAndSteel;
-import tbases.common.item.ItemVoidSheard;
-import tbases.common.item.TBAirIngot;
-import tbases.common.item.TBBloodyCloth;
-import tbases.common.item.TBEntropyIngot;
-import tbases.common.item.TBFireIngot;
-import tbases.common.item.TBTaintedIngot;
-import tbases.common.item.TBTobacco;
-import tbases.common.item.TBWaterIngot;
-import tbases.common.item.resource.ItemBriarSeedbag;
-import tbases.common.item.resource.TBItemNuggetThauminite;
-import tbases.common.item.resource.TBItemThauminiteIngot;
-import tbases.core.TBCore;
-
+import tbases.common.items.ItemBloodyArmor;
+import tbases.common.items.ItemHerobrinesScythe;
+import tbases.common.items.ItemKnowledgeShard;
+import tbases.common.items.ItemRevolver;
+import tbases.common.items.ItemRosehipSyrup;
+import tbases.common.items.ItemSmokingPipe;
+import tbases.common.items.ItemTobacco;
+import tbases.common.items.ItemUkulele;
+import tbases.common.items.ItemVoidFlintAndSteel;
+import tbases.common.items.ItemVoidShears;
+import tbases.root.TBCreativeTabs;
 
 public class TBItems {
-
-    public static ArmorMaterial thauminiteA = EnumHelper.addArmorMaterial("ATHAUMINITE", "thaumicbases:textures/items/armor/thauminite/thauminite", 27, new int[]{3, 8, 6, 3}, 17,SoundEvents.ITEM_ARMOR_EQUIP_IRON, 0.0F).setRepairItem(new ItemStack(TBItems.thauminite_ingot));
-    public static ArmorMaterial bloodyA = EnumHelper.addArmorMaterial("TBBLOODY", "thaumicbases:textures/items/armor/bloody/bloody" ,21, new int[]{2, 6, 5, 2}, 21, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 0.0F).setRepairItem(new ItemStack(TBItems.bloodycloth));
-
-    //Metall and Material
+    public static ItemArmor.ArmorMaterial bloodyA;
     public static Item nuggetthauminite;
     public static Item thauminite_ingot;
     public static Item thauminite_plate;
-
     public static Item bloodycloth;
-
-    //Ex-Fragments
-    public static Item airingot;
-    public static Item fireingot;
-    public static Item wateringot;
-    public static Item earthingot;
-    public static Item orderingot;
-    public static Item entropyingot;
-    public static Item mixedingot;
-    public static Item taintedingot;
-    //Tools
-    public static Item thauminiteaxe;
-    public static Item thauminitepickaxe;
-    public static Item thauminitehoe;
-    public static Item thauminiteshovel;
-    public static Item thauminitesword;
-
-
-
     public static Item voidshears;
     public static Item voidfas;
-
-    //Pyr
     public static Item pyrobucket;
-
-    //Seeds
-    public static Item plaxseed;
-    public static Item sweedseed;
     public static Item aureliapetal;
-    public static Item metalleatseed;
-    public static Item lucriteseed;
-    public static Item lazulliaseed;
-    public static Item redlonseed;
-    public static Item glieoniaseed;
     public static Item briar_seedbag;
     public static Item voidseed;
-    //Armor
     public static Item bloodychest;
     public static Item bloodylegs;
     public static Item bloodyboots;
-
-    public static Item thauminitehelmet;
-    public static Item thauminitechest;
-    public static Item thauminitelegs;
-    public static Item thauminiteboots;
-
-    //Tools
     public static Item herobrinesscythe;
-    //Tobacco
     public static Item tobaccoseed;
     public static Item tobacco_pile;
-    public  static Item tobacco_eldritch;
-    public  static Item tobacco_fighting;
-    public  static Item tobacco_hunger;
-    public  static Item tobacco_knowledge;
-    public  static Item tobacco_mining;
-    public  static Item tobacco_sanity;
-    public  static Item tobacco_tainted;
-    public  static Item tobacco_wispy;
-    public  static Item tobacco_leaves;
-    //Pipe
+    public static Item tobacco_eldritch;
+    public static Item tobacco_fighting;
+    public static Item tobacco_hunger;
+    public static Item tobacco_knowledge;
+    public static Item tobacco_mining;
+    public static Item tobacco_sanity;
+    public static Item tobacco_tainted;
+    public static Item tobacco_wispy;
+    public static Item tobacco_leaves;
     public static Item greatwoodpipe;
     public static Item silverwoodpipe;
-    //Syrup
     public static Item rosehipsyrup;
+    public static Item revolver;
+    public static Item ukulele;
+    public static Item knowledge_shard;
+    public static Item lapis_shard;
+    public static Block[] crystalBlock;
 
-
-    //Mortar
-    public  static  Item mortar;
-
-
-
-
-
-
-
-    public static void init(){
-
-        nuggetthauminite = new TBItemNuggetThauminite().setTranslationKey("nuggetthauminite").setCreativeTab(TBCreativeTabs.TB_CREATIVEtabs);
-        thauminite_ingot = new TBItemThauminiteIngot().setTranslationKey("thauminite_ingot").setCreativeTab(TBCreativeTabs.TB_CREATIVEtabs);
-        thauminite_plate = new Item().setTranslationKey("thauminite_plate").setCreativeTab(TBCreativeTabs.TB_CREATIVEtabs);
-
-        bloodycloth = new TBBloodyCloth().setCreativeTab(TBCreativeTabs.TB_CREATIVEtabs).setTranslationKey("bloodycloth");
-
-        airingot = new TBAirIngot().setTranslationKey("airingot").setCreativeTab(TBCreativeTabs.TB_CREATIVEtabs);
-        fireingot = new TBFireIngot().setTranslationKey("fireingot").setCreativeTab(TBCreativeTabs.TB_CREATIVEtabs);
-        wateringot = new TBWaterIngot().setTranslationKey("wateringot").setCreativeTab(TBCreativeTabs.TB_CREATIVEtabs);
-        earthingot = new Item().setTranslationKey("earthingot").setCreativeTab(TBCreativeTabs.TB_CREATIVEtabs);
-        orderingot = new Item().setTranslationKey("orderingot").setCreativeTab(TBCreativeTabs.TB_CREATIVEtabs);
-        entropyingot = new TBEntropyIngot().setTranslationKey("entropyingot").setCreativeTab(TBCreativeTabs.TB_CREATIVEtabs);
-        mixedingot = new Item().setTranslationKey("mixedingot").setCreativeTab(TBCreativeTabs.TB_CREATIVEtabs);
-        taintedingot = new TBTaintedIngot().setTranslationKey("taintedingot").setCreativeTab(TBCreativeTabs.TB_CREATIVEtabs);
-
-        thauminiteaxe =  new ItemThauminiteAxe(TBMaterial.thauminite).setTranslationKey("thauminiteaxe").setCreativeTab(TBCreativeTabs.TB_CREATIVEtabs);
-        thauminitehoe =  new ItemThauminiteHoe(TBMaterial.thauminite).setTranslationKey("thauminitehoe").setCreativeTab(TBCreativeTabs.TB_CREATIVEtabs);
-        thauminitepickaxe =  new ItemThauminitePickaxe(TBMaterial.thauminite).setTranslationKey("thauminitepickaxe").setCreativeTab(TBCreativeTabs.TB_CREATIVEtabs);
-        thauminiteshovel =  new ItemThauminiteShovel(TBMaterial.thauminite).setTranslationKey("thauminiteshovel").setCreativeTab(TBCreativeTabs.TB_CREATIVEtabs);
-        thauminitesword =  new ItemThauminiteSword(TBMaterial.thauminite).setTranslationKey("thauminitesword").setCreativeTab(TBCreativeTabs.TB_CREATIVEtabs);
-
-        voidshears = new ItemVoidSheard().setTranslationKey("voidshears").setCreativeTab(TBCreativeTabs.TB_CREATIVEtabs);
-        voidfas = new ItemVoidFlintAndSteel().setTranslationKey("voidfas").setCreativeTab(TBCreativeTabs.TB_CREATIVEtabs);
-
-
-        pyrobucket = new ItemPyrofluidBucket().setCreativeTab(TBCreativeTabs.TB_CREATIVEtabs).setTranslationKey("pyrobucket");
-
-
-        plaxseed = new ItemSeeds(TBBlocks.plax,Blocks.FARMLAND).setTranslationKey("plaxseed");
-        sweedseed = new ItemSeeds(TBBlocks.sweed,Blocks.GRASS).setTranslationKey("sweedseed");
-        tobaccoseed = new ItemSeeds(TBBlocks.tobacco,Blocks.FARMLAND).setTranslationKey("tobaccoseed");
-        aureliapetal = new Item().setTranslationKey("aureliapetal");
-        metalleatseed = new ItemSeeds(TBBlocks.metalleat,Blocks.FARMLAND).setTranslationKey("metalleatseed");
-        lazulliaseed = new ItemSeeds(TBBlocks.lazullia,Blocks.FARMLAND).setTranslationKey("lazulliaseed");
-        redlonseed = new ItemSeeds(TBBlocks.redlonstem,Blocks.FARMLAND).setTranslationKey("redlonseed");
-        lucriteseed = new ItemSeeds(TBBlocks.lucrite,Blocks.FARMLAND).setTranslationKey("lucriteseed");
-        glieoniaseed = new ItemSeeds(TBBlocks.glieonia,Blocks.FARMLAND).setTranslationKey("glieoniaseed");
-        voidseed = new ItemSeeds(TBBlocks.voidplant,Blocks.FARMLAND).setTranslationKey("voidseed");
-        briar_seedbag = new ItemBriarSeedbag().setTranslationKey("briar_seedbag").setCreativeTab(TBCreativeTabs.TB_CREATIVEtabs);
-
-        bloodychest = new ItemBloodyArmor(bloodyA,0,1,EntityEquipmentSlot.CHEST).setTranslationKey("bloodychest").setCreativeTab(TBCreativeTabs.TB_CREATIVEtabs);
-        bloodylegs = new ItemBloodyArmor(bloodyA,0,2, EntityEquipmentSlot.LEGS).setTranslationKey("bloodylegs").setCreativeTab(TBCreativeTabs.TB_CREATIVEtabs);
-        bloodyboots = new ItemBloodyArmor(bloodyA,0,3, EntityEquipmentSlot.FEET).setTranslationKey("bloodyboots").setCreativeTab(TBCreativeTabs.TB_CREATIVEtabs);
-
-        thauminitehelmet = new ItemThauminiteArmor(thauminiteA,0,0,EntityEquipmentSlot.HEAD).setTranslationKey("thauminitehelmet").setCreativeTab(TBCreativeTabs.TB_CREATIVEtabs);
-        thauminitechest = new ItemThauminiteArmor(thauminiteA,0,1,EntityEquipmentSlot.CHEST).setTranslationKey("thauminitechest").setCreativeTab(TBCreativeTabs.TB_CREATIVEtabs);
-        thauminitelegs = new ItemThauminiteArmor(thauminiteA,0,2,EntityEquipmentSlot.LEGS).setTranslationKey("thauminitelegs").setCreativeTab(TBCreativeTabs.TB_CREATIVEtabs);
-        thauminiteboots = new ItemThauminiteArmor(thauminiteA,0,3,EntityEquipmentSlot.FEET).setTranslationKey("thauminiteboots").setCreativeTab(TBCreativeTabs.TB_CREATIVEtabs);
-
-
-
-        herobrinesscythe = new ItemHerobrinesScythe().setTranslationKey("herobrinesscythe").setCreativeTab(TBCreativeTabs.TB_CREATIVEtabs);
-
-        tobacco_pile = new TBTobacco().setTranslationKey("tobacco_pile").setCreativeTab(TBCreativeTabs.TB_CREATIVEtabs);
-        tobacco_eldritch = new TBTobacco().setTranslationKey("tobacco_eldritch").setCreativeTab(TBCreativeTabs.TB_CREATIVEtabs);
-        tobacco_fighting = new TBTobacco().setTranslationKey("tobacco_fighting").setCreativeTab(TBCreativeTabs.TB_CREATIVEtabs);
-        tobacco_hunger = new TBTobacco().setTranslationKey("tobacco_hunger").setCreativeTab(TBCreativeTabs.TB_CREATIVEtabs);
-        tobacco_knowledge = new TBTobacco().setTranslationKey("tobacco_knowledge").setCreativeTab(TBCreativeTabs.TB_CREATIVEtabs);
-        tobacco_mining = new TBTobacco().setTranslationKey("tobacco_mining").setCreativeTab(TBCreativeTabs.TB_CREATIVEtabs);
-        tobacco_sanity = new TBTobacco().setTranslationKey("tobacco_sanity").setCreativeTab(TBCreativeTabs.TB_CREATIVEtabs);
-        tobacco_tainted = new TBTobacco().setTranslationKey("tobacco_tainted").setCreativeTab(TBCreativeTabs.TB_CREATIVEtabs);
-        tobacco_wispy = new TBTobacco().setTranslationKey("tobacco_wispy").setCreativeTab(TBCreativeTabs.TB_CREATIVEtabs);
-        tobacco_leaves = new tbases.common.item.resourcee.ItemTobaccoLeaves().setTranslationKey("tobacco_leaves").setCreativeTab(TBCreativeTabs.TB_CREATIVEtabs);
-
-        greatwoodpipe = new ItemSmokingPipe(false).setTranslationKey("greatwoodpipe").setCreativeTab(TBCreativeTabs.TB_CREATIVEtabs);
-        silverwoodpipe = new ItemSmokingPipe(true).setTranslationKey("silverwoodpipe").setCreativeTab(TBCreativeTabs.TB_CREATIVEtabs);
-
-        mortar = new ItemMortarAndPesle().setTranslationKey("mortar").setCreativeTab(TBCreativeTabs.TB_CREATIVEtabs);
-        rosehipsyrup = new ItemRosehipSyrup().setTranslationKey("rosehipsyrup").setCreativeTab(TBCreativeTabs.TB_CREATIVEtabs);
-
-
+    public TBItems() {
     }
 
-
-
-    public static void InGameRegistr(){
-        TBItems.registerItem(nuggetthauminite, nuggetthauminite.getTranslationKey().substring(5));
-        TBItems.registerItem(thauminite_ingot,thauminite_ingot.getTranslationKey().substring(5));
-        TBItems.registerItem(thauminite_plate,thauminite_plate.getTranslationKey().substring(5));
-        TBItems.registerItem(bloodycloth,bloodycloth.getTranslationKey().substring(5));
-        TBItems.registerItem(airingot, airingot.getTranslationKey().substring(5));
-        TBItems.registerItem(fireingot,fireingot.getTranslationKey().substring(5));
-        TBItems.registerItem(earthingot, earthingot.getTranslationKey().substring(5));
-        TBItems.registerItem(wateringot,wateringot.getTranslationKey().substring(5));
-        TBItems.registerItem(orderingot, orderingot.getTranslationKey().substring(5));
-        TBItems.registerItem(entropyingot,entropyingot.getTranslationKey().substring(5));
-        TBItems.registerItem(mixedingot, mixedingot.getTranslationKey().substring(5));
-        TBItems.registerItem(taintedingot,taintedingot.getTranslationKey().substring(5));
-
-        TBItems.registerItem(thauminiteaxe,thauminiteaxe.getTranslationKey().substring(5));
-        TBItems.registerItem(thauminitepickaxe,thauminitepickaxe.getTranslationKey().substring(5));
-        TBItems.registerItem(thauminitesword,thauminitesword.getTranslationKey().substring(5));
-        TBItems.registerItem(thauminiteshovel,thauminiteshovel.getTranslationKey().substring(5));
-        TBItems.registerItem(thauminitehoe,thauminitehoe.getTranslationKey().substring(5));
-
-        TBItems.registerItem(voidshears,voidshears.getTranslationKey().substring(5));
-        TBItems.registerItem(voidfas,voidfas.getTranslationKey().substring(5));
-
-        TBItems.registerItem(pyrobucket,pyrobucket.getTranslationKey().substring(5));
-
-        TBItems.registerItem(plaxseed,plaxseed.getTranslationKey().substring(5));
-        TBItems.registerItem(sweedseed,sweedseed.getTranslationKey().substring(5));
-        TBItems.registerItem(aureliapetal,aureliapetal.getTranslationKey().substring(5));
-        TBItems.registerItem(metalleatseed,metalleatseed.getTranslationKey().substring(5));
-        TBItems.registerItem(lazulliaseed,lazulliaseed.getTranslationKey().substring(5));
-        TBItems.registerItem(briar_seedbag,briar_seedbag.getTranslationKey().substring(5));
-        TBItems.registerItem(redlonseed,redlonseed.getTranslationKey().substring(5));
-        TBItems.registerItem(lucriteseed,lucriteseed.getTranslationKey().substring(5));
-        TBItems.registerItem(glieoniaseed,glieoniaseed.getTranslationKey().substring(5));
-        TBItems.registerItem(voidseed,voidseed.getTranslationKey().substring(5));
-
-        TBItems.registerItem(bloodychest,bloodychest.getTranslationKey().substring(5));
-        TBItems.registerItem(bloodylegs,bloodylegs.getTranslationKey().substring(5));
-        TBItems.registerItem(bloodyboots,bloodyboots.getTranslationKey().substring(5));
-
-        TBItems.registerItem(thauminitehelmet,thauminitehelmet.getTranslationKey().substring(5));
-        TBItems.registerItem(thauminitechest,thauminitechest.getTranslationKey().substring(5));
-        TBItems.registerItem(thauminitelegs,thauminitelegs.getTranslationKey().substring(5));
-        TBItems.registerItem(thauminiteboots,thauminiteboots.getTranslationKey().substring(5));
-
-        TBItems.registerItem(herobrinesscythe,herobrinesscythe.getTranslationKey().substring(5));
-
-        TBItems.registerItem(tobacco_eldritch,tobacco_eldritch.getTranslationKey().substring(5));
-        TBItems.registerItem(tobacco_fighting,tobacco_fighting.getTranslationKey().substring(5));
-        TBItems.registerItem(tobacco_hunger,tobacco_hunger.getTranslationKey().substring(5));
-        TBItems.registerItem(tobacco_knowledge,tobacco_knowledge.getTranslationKey().substring(5));
-        TBItems.registerItem(tobacco_mining,tobacco_mining.getTranslationKey().substring(5));
-        TBItems.registerItem(tobacco_pile,tobacco_pile.getTranslationKey().substring(5));
-        TBItems.registerItem(tobacco_sanity,tobacco_sanity.getTranslationKey().substring(5));
-        TBItems.registerItem(tobacco_tainted,tobacco_tainted.getTranslationKey().substring(5));
-        TBItems.registerItem(tobacco_wispy,tobacco_wispy.getTranslationKey().substring(5));
-        TBItems.registerItem(tobaccoseed,tobaccoseed.getTranslationKey().substring(5));
-        TBItems.registerItem(tobacco_leaves,tobacco_leaves.getTranslationKey().substring(5));
-        TBItems.registerItem(mortar,mortar.getTranslationKey().substring(5));
-
-        TBItems.registerItem(greatwoodpipe,greatwoodpipe.getTranslationKey().substring(5));
-        TBItems.registerItem(silverwoodpipe,silverwoodpipe.getTranslationKey().substring(5));
-
-        TBItems.registerItem(rosehipsyrup,rosehipsyrup.getTranslationKey().substring(5));
-
-
+    public static void init() {
+        nuggetthauminite = (new Item()).setTranslationKey("nuggetthauminite").setCreativeTab(TBCreativeTabs.TB_CREATIVEtabs);
+        thauminite_ingot = (new Item()).setTranslationKey("thauminite_ingot").setCreativeTab(TBCreativeTabs.TB_CREATIVEtabs);
+        thauminite_plate = (new Item()).setTranslationKey("thauminite_plate").setCreativeTab(TBCreativeTabs.TB_CREATIVEtabs);
+        bloodycloth = (new Item()).setCreativeTab(TBCreativeTabs.TB_CREATIVEtabs).setTranslationKey("bloodycloth");
+        voidshears = (new ItemVoidShears()).setTranslationKey("voidshears").setCreativeTab(TBCreativeTabs.TB_CREATIVEtabs);
+        voidfas = (new ItemVoidFlintAndSteel()).setTranslationKey("voidfas").setCreativeTab(TBCreativeTabs.TB_CREATIVEtabs);
+        tobaccoseed = (new ItemSeeds(TBBlocks.tobacco, Blocks.FARMLAND)).setTranslationKey("tobaccoseed").setCreativeTab(TBCreativeTabs.TB_CREATIVEtabs);
+        aureliapetal = (new Item()).setTranslationKey("aureliapetal").setCreativeTab(TBCreativeTabs.TB_CREATIVEtabs);
+        voidseed = (new ItemSeeds(TBBlocks.voidplant, Blocks.FARMLAND)).setTranslationKey("voidseed").setCreativeTab(TBCreativeTabs.TB_CREATIVEtabs);
+        briar_seedbag = (new Item()).setTranslationKey("briar_seedbag").setCreativeTab(TBCreativeTabs.TB_CREATIVEtabs);
+        knowledge_shard = (new ItemKnowledgeShard()).setTranslationKey("knowledge_shard").setCreativeTab(TBCreativeTabs.TB_CREATIVEtabs);
+        bloodychest = (new ItemBloodyArmor(bloodyA, 0, 1, EntityEquipmentSlot.CHEST)).setTranslationKey("bloodychest").setCreativeTab(TBCreativeTabs.TB_CREATIVEtabs);
+        bloodylegs = (new ItemBloodyArmor(bloodyA, 0, 2, EntityEquipmentSlot.LEGS)).setTranslationKey("bloodylegs").setCreativeTab(TBCreativeTabs.TB_CREATIVEtabs);
+        bloodyboots = (new ItemBloodyArmor(bloodyA, 0, 3, EntityEquipmentSlot.FEET)).setTranslationKey("bloodyboots").setCreativeTab(TBCreativeTabs.TB_CREATIVEtabs);
+        herobrinesscythe = (new ItemHerobrinesScythe()).setTranslationKey("herobrinesscythe").setCreativeTab(TBCreativeTabs.TB_CREATIVEtabs);
+        tobacco_pile = (new ItemTobacco()).setTranslationKey("tobacco_pile").setCreativeTab(TBCreativeTabs.TB_CREATIVEtabs);
+        tobacco_eldritch = (new ItemTobacco()).setTranslationKey("tobacco_eldritch").setCreativeTab(TBCreativeTabs.TB_CREATIVEtabs);
+        tobacco_fighting = (new ItemTobacco()).setTranslationKey("tobacco_fighting").setCreativeTab(TBCreativeTabs.TB_CREATIVEtabs);
+        tobacco_hunger = (new ItemTobacco()).setTranslationKey("tobacco_hunger").setCreativeTab(TBCreativeTabs.TB_CREATIVEtabs);
+        tobacco_knowledge = (new ItemTobacco()).setTranslationKey("tobacco_knowledge").setCreativeTab(TBCreativeTabs.TB_CREATIVEtabs);
+        tobacco_mining = (new ItemTobacco()).setTranslationKey("tobacco_mining").setCreativeTab(TBCreativeTabs.TB_CREATIVEtabs);
+        tobacco_sanity = (new ItemTobacco()).setTranslationKey("tobacco_sanity").setCreativeTab(TBCreativeTabs.TB_CREATIVEtabs);
+        tobacco_tainted = (new ItemTobacco()).setTranslationKey("tobacco_tainted").setCreativeTab(TBCreativeTabs.TB_CREATIVEtabs);
+        tobacco_wispy = (new ItemTobacco()).setTranslationKey("tobacco_wispy").setCreativeTab(TBCreativeTabs.TB_CREATIVEtabs);
+        tobacco_leaves = (new Item()).setTranslationKey("tobacco_leaves").setCreativeTab(TBCreativeTabs.TB_CREATIVEtabs);
+        greatwoodpipe = (new ItemSmokingPipe(false)).setTranslationKey("greatwoodpipe").setCreativeTab(TBCreativeTabs.TB_CREATIVEtabs);
+        silverwoodpipe = (new ItemSmokingPipe(true)).setTranslationKey("silverwoodpipe").setCreativeTab(TBCreativeTabs.TB_CREATIVEtabs);
+        rosehipsyrup = (new ItemRosehipSyrup()).setTranslationKey("rosehipsyrup").setCreativeTab(TBCreativeTabs.TB_CREATIVEtabs);
+        revolver = (new ItemRevolver()).setTranslationKey("revolver").setMaxStackSize(1).setMaxDamage(1561).setCreativeTab(TBCreativeTabs.TB_CREATIVEtabs);
+        ukulele = (new ItemUkulele()).setTranslationKey("ukulele").setHasSubtypes(true).setMaxStackSize(1).setMaxDamage(0).setCreativeTab(TBCreativeTabs.TB_CREATIVEtabs);
+        lapis_shard = (new Item()).setTranslationKey("lapis_shard").setCreativeTab(TBCreativeTabs.TB_CREATIVEtabs);
     }
 
+    public static void InGameRegistr() {
+        registerItem(nuggetthauminite, nuggetthauminite.getTranslationKey().substring(5));
+        registerItem(thauminite_ingot, thauminite_ingot.getTranslationKey().substring(5));
+        registerItem(thauminite_plate, thauminite_plate.getTranslationKey().substring(5));
+        registerItem(bloodycloth, bloodycloth.getTranslationKey().substring(5));
+        registerItem(voidshears, voidshears.getTranslationKey().substring(5));
+        registerItem(voidfas, voidfas.getTranslationKey().substring(5));
+        registerItem(aureliapetal, aureliapetal.getTranslationKey().substring(5));
+        registerItem(briar_seedbag, briar_seedbag.getTranslationKey().substring(5));
+        registerItem(voidseed, voidseed.getTranslationKey().substring(5));
+        registerItem(bloodychest, bloodychest.getTranslationKey().substring(5));
+        registerItem(bloodylegs, bloodylegs.getTranslationKey().substring(5));
+        registerItem(bloodyboots, bloodyboots.getTranslationKey().substring(5));
+        registerItem(herobrinesscythe, herobrinesscythe.getTranslationKey().substring(5));
+        registerItem(tobacco_eldritch, tobacco_eldritch.getTranslationKey().substring(5));
+        registerItem(tobacco_fighting, tobacco_fighting.getTranslationKey().substring(5));
+        registerItem(tobacco_hunger, tobacco_hunger.getTranslationKey().substring(5));
+        registerItem(tobacco_knowledge, tobacco_knowledge.getTranslationKey().substring(5));
+        registerItem(tobacco_mining, tobacco_mining.getTranslationKey().substring(5));
+        registerItem(tobacco_pile, tobacco_pile.getTranslationKey().substring(5));
+        registerItem(tobacco_sanity, tobacco_sanity.getTranslationKey().substring(5));
+        registerItem(tobacco_tainted, tobacco_tainted.getTranslationKey().substring(5));
+        registerItem(tobacco_wispy, tobacco_wispy.getTranslationKey().substring(5));
+        registerItem(tobaccoseed, tobaccoseed.getTranslationKey().substring(5));
+        registerItem(tobacco_leaves, tobacco_leaves.getTranslationKey().substring(5));
+        registerItem(greatwoodpipe, greatwoodpipe.getTranslationKey().substring(5));
+        registerItem(silverwoodpipe, silverwoodpipe.getTranslationKey().substring(5));
+        registerItem(rosehipsyrup, rosehipsyrup.getTranslationKey().substring(5));
+        registerItem(revolver, revolver.getTranslationKey().substring(5));
+        registerItem(ukulele, ukulele.getTranslationKey().substring(5));
+        registerItem(knowledge_shard, knowledge_shard.getTranslationKey().substring(5));
+        registerItem(lapis_shard, lapis_shard.getTranslationKey().substring(5));
+    }
 
-
-
-
-
-
-
-
-
+    /** @deprecated */
     @Deprecated
-    public static void registerItem(Item item, String name)
-    {
-        if (item.getRegistryName() == null && Strings.isNullOrEmpty(name))
+    public static void registerItem(Item item, String name) {
+        if (item.getRegistryName() == null && Strings.isNullOrEmpty(name)) {
             throw new IllegalArgumentException("Attempted to register a item with no name: " + item);
-        if (item.getRegistryName() != null && !item.getRegistryName().toString().equals(name))
+        } else if (item.getRegistryName() != null && !item.getRegistryName().toString().equals(name)) {
             throw new IllegalArgumentException("Attempted to register a item with conflicting names. Old: " + item.getRegistryName() + " New: " + name);
-        ForgeRegistries.ITEMS.register(item.getRegistryName() == null ? item.setRegistryName(name) : item);
+        } else {
+            ForgeRegistries.ITEMS.register(item.getRegistryName() == null ? (Item)item.setRegistryName(name) : item);
+        }
     }
 
-    public static void Renders(){
-
+    public static void Renders() {
         renderItems(nuggetthauminite);
         renderItems(thauminite_ingot);
         renderItems(thauminite_plate);
         renderItems(bloodycloth);
-
-        renderItems(airingot);
-        renderItems(fireingot);
-        renderItems(earthingot);
-        renderItems(wateringot);
-        renderItems(orderingot);
-        renderItems(entropyingot);
-        renderItems(mixedingot);
-        renderItems(taintedingot);
-
-        renderItems(thauminiteaxe);
-        renderItems(thauminitepickaxe);
-        renderItems(thauminiteshovel);
-        renderItems(thauminitesword);
-        renderItems(thauminitehoe);
-
-        renderItems(pyrobucket);
-
-        renderItems(plaxseed);
-        renderItems(sweedseed);
         renderItems(aureliapetal);
         renderItems(briar_seedbag);
-        renderItems(metalleatseed);
-        renderItems(lucriteseed);
-        renderItems(lazulliaseed);
-        renderItems(glieoniaseed);
         renderItems(voidseed);
-        renderItems(redlonseed);
-
-
         renderItems(bloodychest);
         renderItems(bloodylegs);
         renderItems(bloodyboots);
-
-        renderItems(thauminitehelmet);
-        renderItems(thauminitechest);
-        renderItems(thauminitelegs);
-        renderItems(thauminiteboots);
         renderItems(herobrinesscythe);
-
         renderItems(tobacco_eldritch);
         renderItems(tobacco_fighting);
         renderItems(tobacco_hunger);
@@ -351,27 +167,22 @@ public class TBItems {
         renderItems(tobacco_wispy);
         renderItems(tobaccoseed);
         renderItems(tobacco_leaves);
-        renderItems(mortar);
-
         renderItems(greatwoodpipe);
         renderItems(silverwoodpipe);
-
         renderItems(rosehipsyrup);
-
         renderItems(voidfas);
         renderItems(voidshears);
-
-
+        renderItems(knowledge_shard);
+        renderItems(revolver);
+        renderItems(lapis_shard);
     }
 
-
-
-    public static void renderItems(Item i){
-
-        Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(i, 0, new ModelResourceLocation(
-                TBCore.modid + ":" + i.getTranslationKey().substring(5), "inventory"));
-
+    public static void renderItems(Item i) {
+        Minecraft.getMinecraft().getRenderItem().getItemModelMesher().register(i, 0, new ModelResourceLocation("thaumicbases:" + i.getTranslationKey().substring(5), "inventory"));
     }
 
-
+    static {
+        bloodyA = EnumHelper.addArmorMaterial("TBBLOODY", "thaumicbases:textures/items/armor/bloody/bloody", 21, new int[]{2, 6, 5, 2}, 21, SoundEvents.ITEM_ARMOR_EQUIP_IRON, 0.0F).setRepairItem(new ItemStack(bloodycloth));
+        crystalBlock = new Block[]{TBBlocks.crystalblocktainted, TBBlocks.crystalblockentropy, TBBlocks.crystalblockorder, TBBlocks.crystalblockearth, TBBlocks.crystalblockfire, TBBlocks.crystalblockair, TBBlocks.crystalblockwater, TBBlocks.crystalblockmixed};
+    }
 }

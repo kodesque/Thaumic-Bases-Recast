@@ -1,8 +1,0 @@
-{
-  "parent":  "tbases:block/thaumanvil",
-  "textures": {
-    "particle": "tbases:blocks/base",
-    "body": "tbases:blocks/base",
-    "top": "tbases:blocks/top_damaged_2"
-  }
-}

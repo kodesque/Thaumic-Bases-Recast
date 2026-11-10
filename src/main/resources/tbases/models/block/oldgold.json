@@ -1,8 +1,0 @@
-{
-  "parent": "block/orientable",
-  "textures": {
-    "top": "tbases:blocks/gold_block",
-    "side": "tbases:blocks/gold_block_side",
-    "front": "tbases:blocks/gold_block_side"
-  }
-}

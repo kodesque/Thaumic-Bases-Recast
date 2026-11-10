@@ -3,29 +3,27 @@ package tbases.init;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
-import tbases.common.enchantment.EnchantmentElderKnowledge;
-import tbases.common.enchantment.EnchantmentEldritchBane;
-import tbases.common.enchantment.EnchantmentTainted;
-import tbases.utils.TBConfig;
+import tbases.common.enchantments.EnchantmentElderKnowledge;
+import tbases.common.enchantments.EnchantmentEldritchBane;
+import tbases.common.enchantments.EnchantmentTainted;
 
 public class TBEnchant {
+    public static Enchantment tainted;
+    public static Enchantment elderKnowledge;
+    public static Enchantment eldritchBane;
 
-    public static void setupEnchatments(){
-        eldritchBane = new EnchantmentEldritchBane(Enchantment.Rarity.RARE, TBConfig.eldritchBaneID,7).setName("eldritchBane");
-        eldritchBane.setRegistryName(new ResourceLocation("thaumicbases.eldritchBane"));
-        ForgeRegistries.ENCHANTMENTS.register(eldritchBane);
-        elderKnowledge = new EnchantmentElderKnowledge(Enchantment.Rarity.RARE, TBConfig.eldritchBaneID,12).setName("elderKnowledge");
-        elderKnowledge.setRegistryName(new ResourceLocation("thaumicbases.elderKnowledge"));
-        ForgeRegistries.ENCHANTMENTS.register(elderKnowledge);
-        tainted = new EnchantmentTainted(Enchantment.Rarity.RARE, TBConfig.taintedID,9).setName("tainted");
-        tainted.setRegistryName(new ResourceLocation("thaumicbases.tainted"));
-        ForgeRegistries.ENCHANTMENTS.register(tainted);
-
-
+    public TBEnchant() {
     }
 
-    public static Enchantment
-            tainted,
-            elderKnowledge,
-            eldritchBane;
+    public static void setupEnchatments() {
+        ForgeRegistries.ENCHANTMENTS.register(eldritchBane);
+        ForgeRegistries.ENCHANTMENTS.register(elderKnowledge);
+        ForgeRegistries.ENCHANTMENTS.register(tainted);
+    }
+
+    static {
+        tainted = (Enchantment)(new EnchantmentTainted(Enchantment.Rarity.RARE)).setName("tainted").setRegistryName(new ResourceLocation("thaumicbases", "thaumicbases.tainted"));
+        elderKnowledge = (Enchantment)(new EnchantmentElderKnowledge(Enchantment.Rarity.RARE)).setName("elderKnowledge").setRegistryName(new ResourceLocation("thaumicbases", "thaumicbases.elderKnowledge"));
+        eldritchBane = (Enchantment)(new EnchantmentEldritchBane(Enchantment.Rarity.RARE)).setName("eldritchBane").setRegistryName(new ResourceLocation("thaumicbases", "thaumicbases.eldritchBane"));
+    }
 }
