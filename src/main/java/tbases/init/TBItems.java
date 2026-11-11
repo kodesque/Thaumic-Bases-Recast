@@ -14,7 +14,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.fml.common.registry.ForgeRegistries;
 import tbases.common.items.ItemBloodyArmor;
-import tbases.common.items.ItemHerobrinesScythe;
+import tbases.common.items.ItemHerobrineScythe;
 import tbases.common.items.ItemKnowledgeShard;
 import tbases.common.items.ItemRevolver;
 import tbases.common.items.ItemRosehipSyrup;
@@ -79,7 +79,7 @@ public class TBItems {
         bloodychest = (new ItemBloodyArmor(bloodyA, 0, 1, EntityEquipmentSlot.CHEST)).setTranslationKey("bloodychest").setCreativeTab(TBCreativeTabs.TB_CREATIVEtabs);
         bloodylegs = (new ItemBloodyArmor(bloodyA, 0, 2, EntityEquipmentSlot.LEGS)).setTranslationKey("bloodylegs").setCreativeTab(TBCreativeTabs.TB_CREATIVEtabs);
         bloodyboots = (new ItemBloodyArmor(bloodyA, 0, 3, EntityEquipmentSlot.FEET)).setTranslationKey("bloodyboots").setCreativeTab(TBCreativeTabs.TB_CREATIVEtabs);
-        herobrinesscythe = (new ItemHerobrinesScythe()).setTranslationKey("herobrinesscythe").setCreativeTab(TBCreativeTabs.TB_CREATIVEtabs);
+        herobrinesscythe = (new ItemHerobrineScythe()).setTranslationKey("herobrinesscythe").setCreativeTab(TBCreativeTabs.TB_CREATIVEtabs);
         tobacco_pile = (new ItemTobacco()).setTranslationKey("tobacco_pile").setCreativeTab(TBCreativeTabs.TB_CREATIVEtabs);
         tobacco_eldritch = (new ItemTobacco()).setTranslationKey("tobacco_eldritch").setCreativeTab(TBCreativeTabs.TB_CREATIVEtabs);
         tobacco_fighting = (new ItemTobacco()).setTranslationKey("tobacco_fighting").setCreativeTab(TBCreativeTabs.TB_CREATIVEtabs);

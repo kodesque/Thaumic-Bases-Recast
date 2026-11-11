@@ -20,18 +20,17 @@ import tbases.init.TBEnchant;
 import tbases.init.TBFluids;
 import tbases.init.TBGuiHandler;
 import tbases.init.TBItems;
+import tbases.init.TBRecipes;
 import tbases.init.TBResearch;
-import tbases.init.TBThaumonomicon;
 import tbases.init.TBTiles;
 import tbases.network.proxy.TBServer;
-import tbases.util.RevolverUpgrade;
-import thaumcraft.api.research.ResearchCategory;
+import tbases.init.custom.RevolverUpgrade;
 
 @Mod(
         modid = "thaumicbases",
         name = "Thaumic Bases",
-        version = "3.6.023.0",
-        dependencies = "required-after:thaumcraft@[6.1.BETA26,)"
+        version = "4.0.0",
+        dependencies = "required-after:thaumcraft"
 )
 public class TBCore {
     public static final String modid = "thaumicbases";
@@ -47,7 +46,6 @@ public class TBCore {
     public static TBServer proxy;
     public static SimpleNetworkWrapper network;
     public static TBCore instance;
-    public static ResearchCategory RES_CAT;
 
     public TBCore() {
     }
@@ -71,8 +69,8 @@ public class TBCore {
     public void init(FMLInitializationEvent e) {
         NetworkRegistry.INSTANCE.registerGuiHandler(instance, new TBGuiHandler());
         MinecraftForge.EVENT_BUS.register(new EnchantmentHandler());
-        TBThaumonomicon.setup();
-        TBResearch.registerResearch();
+        TBRecipes.initRecipes();
+        TBResearch.registerCategory();
         network = NetworkRegistry.INSTANCE.newSimpleChannel("thaumbases");
         RegisterHandlers.init();
         RevolverUpgrade.initConflictingMappings();

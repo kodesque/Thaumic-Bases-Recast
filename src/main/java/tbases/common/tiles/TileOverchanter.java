@@ -22,7 +22,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.World;
 import tbases.common.inventory.ContainerOverchanter;
-import tbases.util.AllUtils;
+import tbases.util.NBTUtils;
 import tbases.util.MathUtils;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.casters.IInteractWithCaster;
@@ -99,7 +99,7 @@ public class TileOverchanter extends TileEntityLockable implements IInventory, I
                         NBTTagCompound tag = nbttaglist.getCompoundTagAt(i);
                         if (tag != null && Enchantment.getEnchantmentByID(tag.getShort("id")) == ench) {
                             tag.setShort("lvl", (short)(tag.getShort("lvl") + 1));
-                            NBTTagCompound stackTag = AllUtils.getStackTag(this.inventory);
+                            NBTTagCompound stackTag = NBTUtils.getStackTag(this.inventory);
                             if (!stackTag.hasKey("overchants")) {
                                 stackTag.setIntArray("overchants", new int[]{enchId});
                             } else {
@@ -134,7 +134,7 @@ public class TileOverchanter extends TileEntityLockable implements IInventory, I
     }
 
     private int findEnchantment(ItemStack enchated) {
-        NBTTagCompound stackTag = AllUtils.getStackTag(this.inventory);
+        NBTTagCompound stackTag = NBTUtils.getStackTag(this.inventory);
         Map<Enchantment, Integer> ench = EnchantmentHelper.getEnchantments(enchated);
         Set<Enchantment> keys = ench.keySet();
         Iterator<Enchantment> $i = keys.iterator();

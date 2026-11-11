@@ -11,7 +11,7 @@ import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import tbases.client.render.entities.RenderBullet;
-import tbases.client.render.items.HerobrinesScytheMH;
+import tbases.client.render.items.RenderHerobrinesScythe;
 import tbases.client.render.items.RenderRevolver;
 import tbases.client.render.tiles.RenderOverchanter;
 import tbases.common.entities.EntityRevolverBullet;
@@ -40,7 +40,7 @@ public class TBClient extends TBServer {
 
     public void registerRenderInformation() {
         ClientRegistry.bindTileEntitySpecialRenderer(TileOverchanter.class, new RenderOverchanter());
-        MinecraftForge.EVENT_BUS.register(new HerobrinesScytheMH());
+        MinecraftForge.EVENT_BUS.register(new RenderHerobrinesScythe());
         RenderingRegistry.registerEntityRenderingHandler(EntityRevolverBullet.class, new RenderBullet());
     }
 

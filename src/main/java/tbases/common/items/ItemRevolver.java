@@ -31,7 +31,7 @@ import tbases.init.TBGuiHandler;
 import tbases.init.TBItems;
 import tbases.init.TBSounds;
 import tbases.root.TBCore;
-import tbases.util.RevolverUpgrade;
+import tbases.init.custom.RevolverUpgrade;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.api.blocks.BlocksTC;

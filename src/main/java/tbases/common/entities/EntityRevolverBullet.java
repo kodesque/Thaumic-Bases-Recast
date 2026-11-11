@@ -11,7 +11,7 @@ import net.minecraft.util.EntityDamageSource;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.World;
 import tbases.common.items.ItemRevolver;
-import tbases.util.RevolverUpgrade;
+import tbases.init.custom.RevolverUpgrade;
 import thaumcraft.client.fx.FXDispatcher;
 
 import java.util.ArrayList;

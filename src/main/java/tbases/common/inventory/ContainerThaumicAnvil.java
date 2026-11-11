@@ -20,7 +20,7 @@ import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.apache.commons.lang3.StringUtils;
-import tbases.common.blocks.BlockThaumicAnvil;
+import tbases.common.blocks.machines.BlockThaumicAnvil;
 import tbases.init.TBBlocks;
 
 import java.util.Map;

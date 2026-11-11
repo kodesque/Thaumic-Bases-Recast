@@ -13,7 +13,7 @@ import net.minecraft.util.ITickable;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import tbases.common.blocks.BlockBraizer;
+import tbases.common.blocks.machines.BlockBraizer;
 import thaumcraft.api.aspects.Aspect;
 import thaumcraft.common.lib.events.EssentiaHandler;
 

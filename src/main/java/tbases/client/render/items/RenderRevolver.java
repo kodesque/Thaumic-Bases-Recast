@@ -9,7 +9,7 @@ import net.minecraft.client.renderer.tileentity.TileEntityItemStackRenderer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import tbases.common.items.ItemRevolver;
-import tbases.util.RevolverUpgrade;
+import tbases.init.custom.RevolverUpgrade;
 import thaumcraft.client.lib.obj.AdvancedModelLoader;
 import thaumcraft.client.lib.obj.IModelCustom;
 
@@ -22,8 +22,7 @@ public class RenderRevolver extends TileEntityItemStackRenderer {
     public static final ResourceLocation gun;
     public static final ResourceLocation press;
 
-    public RenderRevolver() {
-    }
+    public RenderRevolver() {}
 
     public void renderByItem(ItemStack item) {
         GlStateManager.pushMatrix();

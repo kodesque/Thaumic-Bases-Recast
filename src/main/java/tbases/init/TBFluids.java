@@ -2,12 +2,10 @@ package tbases.init;
 
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
-import tbases.common.blocks.FluidPyro;
-import tbases.util.OnetimeCaller;
+import tbases.common.blocks.rest.FluidPyro;
 
 public class TBFluids {
     public static final FluidPyro FLUID_PYRO = new FluidPyro();
-    public static final OnetimeCaller init = new OnetimeCaller(TBFluids::$init);
 
     public TBFluids() {
     }

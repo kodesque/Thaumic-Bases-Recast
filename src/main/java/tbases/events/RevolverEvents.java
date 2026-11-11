@@ -7,7 +7,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import tbases.common.items.ItemRevolver;
-import tbases.util.RevolverUpgrade;
+import tbases.init.custom.RevolverUpgrade;
 
 @Mod.EventBusSubscriber(
         modid = "thaumicbases"

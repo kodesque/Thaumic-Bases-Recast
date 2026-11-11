@@ -11,7 +11,7 @@ import tbases.common.inventory.ContainerRevolver;
 import tbases.common.inventory.ContainerThaumicAnvil;
 import tbases.common.inventory.ContainerVoidAnvil;
 import tbases.util.gui.GuiCommon;
-import tbases.util.gui.GuiVoidAnvil;
+import tbases.client.gui.GuiVoidAnvil;
 
 public class TBGuiHandler implements IGuiHandler {
     public static int OVERCHANTER = 0;

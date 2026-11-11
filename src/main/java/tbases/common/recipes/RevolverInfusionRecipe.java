@@ -8,7 +8,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.RecipeMatcher;
 import tbases.common.items.ItemRevolver;
 import tbases.init.TBItems;
-import tbases.util.RevolverUpgrade;
+import tbases.init.custom.RevolverUpgrade;
 import thaumcraft.api.ThaumcraftApiHelper;
 import thaumcraft.api.aspects.AspectList;
 import thaumcraft.api.capabilities.ThaumcraftCapabilities;
